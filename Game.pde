@@ -1,5 +1,6 @@
 int r=50;
 hex[] a=new hex[121];
+boolean Ai = false;
 
 void setup()
 {
@@ -9,7 +10,6 @@ void setup()
   {
     a[i]=new hex();
   }// this loop initializes all the hex objects
-
   int objectCount=0;
   for (int i=0; i<11; i++)  
   {
