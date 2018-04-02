@@ -1,5 +1,5 @@
 int r = 50;
-int numOfCells = 11;
+int numOfCells = 10;
 Hex[] a = new Hex[numOfCells*numOfCells];
 boolean Ai = false;
 

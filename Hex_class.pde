@@ -34,7 +34,7 @@ class Hex
     vertex(x-r/4, y+r/2-r/10+1);
     vertex(x-r/2, y);
     endShape();
-    
+
     fill(255);
     text(cellNumber, x, y);
   }
@@ -67,25 +67,26 @@ class Hex
   void checkAdjacent()
   {
     println("____________________");
-    if(cellNumber%numOfCells != 1 && ((cellNumber + numOfCells) <= numOfCells*numOfCells)) // cells at top don't have any adjacent cell above them
+    println(this.cellNumber);
+    
+    if (cellNumber % numOfCells != 1 && (cellNumber + (numOfCells-1)) < numOfCells*numOfCells)// topmost cells don't have any cell above them
       println("t: "+(cellNumber + (numOfCells-1)));//top
 
-   //if(!(cellNumber <= numOfCells*numOfCells && cellNumber > ((numOfCells*numOfCells - numOfCells) + 1)))
-   if((cellNumber + numOfCells) <= numOfCells*numOfCells)
+    if ((cellNumber + numOfCells) <= numOfCells*numOfCells)
       println("tr: "+(cellNumber + numOfCells));//top right
-   
-   if(!(cellNumber % numOfCells==0))   
+
+    if (!(cellNumber % numOfCells==0))   
       println("btr: "+(cellNumber + 1));//bottom right      
     
-    if(this.cellNumber > numOfCells && !(cellNumber % numOfCells==0)) // first n cells don't have any adjacent cell below them
-      println("b: "+(cellNumber-(numOfCells-1)));//bottom
-
-    if(this.cellNumber > numOfCells)
-      println("btl: "+(cellNumber - numOfCells));//bottom left
-    
-    if(cellNumber%11 != 1)// cells at top don't have any adjacent cell above(left) them
-      println("tl: "+(cellNumber - 1));//top left
-    
+    if (this.cellNumber > numOfCells && !(cellNumber % numOfCells==0)) // first n cells don't have any adjacent cell below them
+     println("b: "+(cellNumber-(numOfCells-1)));//bottom
+     
+    if (this.cellNumber > numOfCells)
+     println("btl: "+(cellNumber - numOfCells));//bottom left
+     
+    if (cellNumber % numOfCells != 1)// cells at top don't have any adjacent cell above(left) them
+     println("tl: "+(cellNumber - 1));//top left
+     
     println("____________________");
   }
 }
