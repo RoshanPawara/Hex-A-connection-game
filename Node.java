@@ -10,7 +10,7 @@ class Node
   
   void displayCellNumber()
   {
-    System.out.println(value);    
+   // System.out.println(value);    
   }
 
 }
