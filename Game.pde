@@ -1,23 +1,25 @@
-int r = 50;
-int numOfCells = 10;
-Hex[] a = new Hex[numOfCells*numOfCells];
-boolean Ai = false;
+int r          = 50;
+boolean Ai     = false;
+int numOfCells = 11;
+Hex[] a        = new Hex[numOfCells * numOfCells];
+Node[] node    = new Node[numOfCells * numOfCells];
 
 void setup()
 {
   size(1366, 768);
   background(127);
-  for (int i=0; i<numOfCells*numOfCells; i++) 
+  for (int i = 0; i < numOfCells * numOfCells; i++) 
   {
-    a[i]=new Hex();
-  }// this loop initializes all the hex objects
+    a[i]    = new Hex();
+    node[i] = new Node(i + 1);
+    create(i);
+  }/* this loop initializes all the hex objects */
 
-  int objectCount=0;
-  for (int i=0; i<numOfCells; i++)  
+  int objectCount = 0;
+  for (int i = 0; i < numOfCells; i++)  
   {
-    for (int j=0; j<numOfCells; j++) 
+    for (int j = 0; j<numOfCells; j++) 
     {
-      
       a[objectCount].getData(width/2-430+i*r-i*7+j*43, height/2-i*r+i*r/2+j*25, r, objectCount+1);
       a[objectCount].show();
       objectCount++;
@@ -27,37 +29,89 @@ void setup()
 
 void draw()
 {
-  stroke(90);
+  /*stroke(90);
   strokeWeight(0.5);
-  line(0, height/2, width, height/2);// X axis
-  line(width/2, 0, width/2, height);// Y axis
-  //println(objectCount);
+  line(0, height/2, width, height/2); // X axis
+  line(width/2, 0, width/2, height);  // Y axis
+  println(objectCount); */
 }
 
 void mousePressed()
 {
   background(127);
-  for (int i=0; i<a.length; i++)
+  for (int i = 0; i < a.length; i++)
   {
     a[i].clicked(mouseX, mouseY);
     a[i].show();
   }
 }
 
-
 void create(int cellNumber)
 {
-  //println(a[cellNumber].available);
-  Node n = new Node(cellNumber);
-  //println(cellNumber);
+  node[cellNumber].parent = node[cellNumber];
+  node[cellNumber].rank   = 0;
+  node[cellNumber].size   = 1;
 }
 
-void union()
+void union(Node x, Node y)
 {
-  
+  Node xRoot = Find(x);
+  Node yRoot = Find(y);
+
+  /* x and y are already in the same set */
+  if (xRoot == yRoot)            
+    return;
+
+  /* x and y are not in same set, so we merge them */
+  if (xRoot.rank < yRoot.rank)
+  {
+    /* swap xRoot and yRoot */
+    Node temp;
+    temp  = xRoot;
+    xRoot = yRoot;
+    yRoot = temp;
+  }
+
+  /* merge yRoot into xRoot */
+  yRoot.parent = xRoot;
+  xRoot.size   = xRoot.size + yRoot.size;
+  if (xRoot.rank == yRoot.rank)
+  {
+    xRoot.rank = xRoot.rank + 1;
+  }
 }
 
-void find()
+Node Find(Node x)
 {
-  
+  if (x.parent != x)
+  {
+    x.parent = Find(x.parent);
+  }
+  /*println("root:" + (x.parent.value));*/
+  return x.parent;
 } 
+
+void gameOver()
+{
+  for (int i = 0; i < numOfCells; i++) /* bottom edge for blue */
+  {
+    for (int j = numOfCells * numOfCells - numOfCells; j < numOfCells * numOfCells; j++) /* top edge for blue */
+    {  
+      if (Find(node[i]).parent.value == Find(node[j]).parent.value && (a[i].col == color(0, 0, 255) && a[j].col == color(0, 0, 255)))
+      {
+        println("Blue Wins");
+      }
+    }
+  }
+
+  for (int i = 0; i <= numOfCells * numOfCells - numOfCells; i += numOfCells) /* top edge for red */
+  {
+    for (int j = numOfCells - 1; j < numOfCells * numOfCells; j += numOfCells) /* bottom edge for red */
+    {
+      if (Find(node[i]).parent.value == Find(node[j]).parent.value && (a[i].col == color(255, 0, 0) && a[j].col == color(255, 0, 0)))
+      {
+        println("Red wins");
+      }
+    }
+  }
+}/* GameOver function ends here */
