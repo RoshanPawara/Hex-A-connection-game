@@ -1,3 +1,8 @@
+import processing.sound.*;
+SoundFile file;
+String audioName = "Pop.mp3";
+String path;
+
 int r          = 50;
 boolean Ai     = false;
 int numOfCells = 11;
@@ -6,6 +11,8 @@ Node[] node    = new Node[numOfCells * numOfCells];
 
 void setup()
 {
+  path = sketchPath(audioName);
+  file = new SoundFile(this, path);
   size(1366, 768);
   background(127);
   for (int i = 0; i < numOfCells * numOfCells; i++) 
@@ -30,10 +37,10 @@ void setup()
 void draw()
 {
   /*stroke(90);
-  strokeWeight(0.5);
-  line(0, height/2, width, height/2); // X axis
-  line(width/2, 0, width/2, height);  // Y axis
-  println(objectCount); */
+   strokeWeight(0.5);
+   line(0, height/2, width, height/2); // X axis
+   line(width/2, 0, width/2, height);  // Y axis
+   println(objectCount); */
 }
 
 void mousePressed()
@@ -100,6 +107,7 @@ void gameOver()
       if (Find(node[i]).parent.value == Find(node[j]).parent.value && (a[i].col == color(0, 0, 255) && a[j].col == color(0, 0, 255)))
       {
         println("Blue Wins");
+        exit();
       }
     }
   }
@@ -111,6 +119,7 @@ void gameOver()
       if (Find(node[i]).parent.value == Find(node[j]).parent.value && (a[i].col == color(255, 0, 0) && a[j].col == color(255, 0, 0)))
       {
         println("Red wins");
+        exit();
       }
     }
   }
