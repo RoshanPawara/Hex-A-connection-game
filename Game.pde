@@ -15,6 +15,7 @@ void setup()
   file = new SoundFile(this, path);
   size(1366, 768);
   background(127);
+  board();
   for (int i = 0; i < numOfCells * numOfCells; i++) 
   {
     a[i]    = new Hex();
@@ -35,8 +36,8 @@ void setup()
 }
 
 void draw()
-{
-  /*stroke(90);
+{ 
+   /*stroke(90);
    strokeWeight(0.5);
    line(0, height/2, width, height/2); // X axis
    line(width/2, 0, width/2, height);  // Y axis
@@ -46,6 +47,7 @@ void draw()
 void mousePressed()
 {
   background(127);
+  board();
   for (int i = 0; i < a.length; i++)
   {
     a[i].clicked(mouseX, mouseY);
@@ -124,3 +126,51 @@ void gameOver()
     }
   }
 }/* GameOver function ends here */
+
+
+void board()
+{
+  strokeWeight(1);
+  stroke(1);
+  /*vertex(width/2 + 491,height/2);
+   vertex(width/2 - 491, height/2);
+   vertex(width/2, height/2 - 302);
+   vertex(width/2, height/2 + 302);
+   vertex(width/2 + 491,height/2);*/
+  /* Red top */
+  fill(255, 0, 0);
+  beginShape();
+  vertex(width/2, height/2 - 287);
+  vertex(width/2, height/2 - 264);
+  vertex(width/2 - 454, height/2);
+  vertex(width/2 - 491, height/2);
+  vertex(width/2, height/2 - 287);
+  endShape();
+  /* Red bottom */
+  beginShape();
+  vertex(width/2, height/2 + 287);
+  vertex(width/2, height/2 + 264);
+  vertex(width/2 + 454, height/2);
+  vertex(width/2 + 491, height/2);
+  vertex(width/2, height/2 + 287);
+  endShape();
+
+  /* blue top */
+  fill(0, 0, 255);
+  beginShape();
+  vertex(width/2, height/2 - 287);
+  vertex(width/2, height/2 - 264);
+  vertex(width/2 + 454, height/2);
+  vertex(width/2 + 491, height/2);
+  vertex(width/2, height/2 - 287);
+  endShape();
+  /* blue bottom */
+
+  beginShape();
+  vertex(width/2, height/2 + 287);
+  vertex(width/2, height/2 + 264);
+  vertex(width/2 - 454, height/2);
+  vertex(width/2 - 491, height/2);
+  vertex(width/2, height/2 + 287);
+  endShape();
+}

@@ -6,7 +6,7 @@ class Hex
   int col;            /* color of the cell */
   boolean available;  /* initial status of every cell */
   int cellNumber;     /* Cell Number */
-  
+
   /* Variables to calculate the index of adjacent cells */
   int top;
   int topRight;
@@ -14,14 +14,14 @@ class Hex
   int bottom;
   int bottomRight;
   int bottomLeft;
-  
+
   /* boolean variables for adjacent cells to determine whether the cell exists */
   boolean topExists;
   boolean topRightExists;
   boolean topLeftExists;  
-  boolean  bottomExists;
-  boolean  bottomRightExists;  
-  boolean  bottomLeftExists; 
+  boolean bottomExists;
+  boolean bottomRightExists;  
+  boolean bottomLeftExists; 
 
   /* Constructor */
   Hex()
