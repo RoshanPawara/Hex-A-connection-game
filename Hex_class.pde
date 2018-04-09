@@ -85,7 +85,7 @@ class Hex
       {
         col = color(0, 0, 255);
       }
-      file.play();
+      file.play(); /* play sound on click */
       available = false;  /* once clicked then change the status of the hex cell to notAvailable */
       Ai = !Ai;           /* swaps the control between Ai and the user */
       /* println("node: " + node[this.cellNumber - 1].value); */
